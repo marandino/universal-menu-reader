@@ -3,7 +3,7 @@ import { Box, View, Button, Text, Heading, Link } from "native-base";
 
 export default function HomeScreen() {
   return (
-    <View h={"100%"} background="orange.600">
+    <View h={"100%"} background="primary">
       <Box bg={"white"} py="10" px="6" rounded="lg" alignSelf="center" my="auto">
         <Box rounded="lg">
           <Heading alignSelf={"center"} >Get started</Heading>
