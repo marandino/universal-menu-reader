@@ -2,16 +2,17 @@ import { Camera, CameraType, onCameraReady } from "expo-camera";
 import { useRef, useState } from "react";
 import { Button, Text, View, Container, Image } from "native-base";
 
-async function takePicture() {
-  if (!permission) return;
-  const photo = await cameraRef.current.takePictureAsync();
-  setPictureOnBuffer(photo);
-}
 export default function CameraScreen() {
   const [type, setType] = useState(CameraType.back);
   const [isPictureOnBuffer, setPictureOnBuffer] = useState(null);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   let cameraRef = useRef(null);
+
+  async function takePicture() {
+    if (!permission) return;
+    const photo = await cameraRef.current.takePictureAsync();
+    setPictureOnBuffer(photo);
+  }
 
   if (!permission) {
     // this will also be null, if the camera hasn't loaded yet
