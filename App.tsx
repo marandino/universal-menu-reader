@@ -32,7 +32,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="Camera"
+          initialRouteName="Home"
         >
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Camera" component={CameraScreen} />

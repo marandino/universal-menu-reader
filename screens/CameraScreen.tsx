@@ -1,15 +1,18 @@
-import { Camera, CameraType, onCameraReady } from "expo-camera";
+import { Camera, CameraCapturedPicture, CameraType } from "expo-camera";
 import { useRef, useState } from "react";
 import { Button, Text, View, Container, Image } from "native-base";
 
 export default function CameraScreen() {
   const [type, setType] = useState(CameraType.back);
-  const [isPictureOnBuffer, setPictureOnBuffer] = useState(null);
+  const [isPictureOnBuffer, setPictureOnBuffer] =
+    useState<CameraCapturedPicture>();
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  let cameraRef = useRef(null);
+  // I really don't like this <any> here, but after reading expo's documentation, I couldn't find a way to fix this.
+  // https://github.com/expo/expo/issues/4399
+  let cameraRef = useRef<Camera | any>();
 
   async function takePicture() {
-    if (!permission) return;
+    if (!permission || !cameraRef.current) return;
     const photo = await cameraRef.current.takePictureAsync();
     setPictureOnBuffer(photo);
   }
@@ -19,6 +22,7 @@ export default function CameraScreen() {
     return <View />;
   }
 
+  // iOS is broken here...
   if (!permission.granted) {
     return (
       <Container m={"auto"}>
@@ -55,7 +59,7 @@ export default function CameraScreen() {
           position={"absolute"}
           m="4"
           colorScheme="secondary"
-          onPress={() => setPictureOnBuffer(null)}
+          onPress={() => setPictureOnBuffer(undefined)}
         >
           Go Back
         </Button>
@@ -65,7 +69,7 @@ export default function CameraScreen() {
 
   return (
     <View flex={1}>
-      <Camera ref={cameraRef} flex={1} type={type}>
+      <Camera ref={cameraRef} style={{ flex: 1 }} type={type}>
         <Button
           alignSelf={"center"}
           my={"auto"}
