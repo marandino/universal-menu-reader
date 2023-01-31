@@ -3,7 +3,7 @@ import { Box, View, Button, Text, Heading } from "native-base";
 import { Linking } from "react-native";
 
 //TODO: extract this into a separate file if it grows too long, or if it's used in multiple places
-function openLink(url) {
+function openLink(url: string) {
   Linking.openURL(url);
 }
 
