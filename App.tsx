@@ -1,10 +1,6 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider, extendTheme, StatusBar } from "native-base";
-import HomeScreen from "./screens/HomeScreen";
-import CameraScreen from "./screens/CameraScreen";
-const Stack = createNativeStackNavigator();
+import Navigation from "./Navigation";
 
 export default function App() {
   const theme = extendTheme({
@@ -29,15 +25,7 @@ export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
       <StatusBar />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Home"
-        >
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Camera" component={CameraScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Navigation />
     </NativeBaseProvider>
   );
 }
