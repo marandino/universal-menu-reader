@@ -1,13 +1,14 @@
 import React from "react";
 import { Box, View, Button, Text, Heading } from "native-base";
 import { Linking } from "react-native";
+import { ScreenProps } from "../Navigation";
 
 //TODO: extract this into a separate file if it grows too long, or if it's used in multiple places
 function openLink(url: string) {
   Linking.openURL(url);
 }
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: ScreenProps) {
   return (
     <View h={"100%"} background="primary">
       <Box
@@ -44,7 +45,7 @@ export default function HomeScreen() {
           mt={6}
           colorScheme="primary"
           onPress={() => {
-            console.log("hello");
+            navigation.navigate("Camera");
           }}
         >
           Open Camera
