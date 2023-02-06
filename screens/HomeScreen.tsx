@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, View, Button, Text, Heading } from "native-base";
+import { Box, View, Button, Text, Heading, Container, HStack } from "native-base";
 import { Linking } from "react-native";
 import { ScreenProps } from "../Navigation";
 
@@ -50,16 +50,31 @@ export default function HomeScreen({ navigation }: ScreenProps) {
         >
           Open Camera
         </Button>
-        <Button
-          variant={"ghost"}
-          colorScheme="secondary"
-          mt={"2"}
-          onPress={() => {
-            console.log("hello");
-          }}
-        >
-          Select Currency
-        </Button>
+        <Container alignSelf={"center"} >
+          <HStack space="1">
+            <Button
+              variant={"ghost"}
+              colorScheme="secondary"
+              mt={"2"}
+              onPress={() => {
+                console.log("hello");
+              }}
+            >
+              CRC
+            </Button>
+            <Text mt={"4"} textAlign={"center"} fontSize="md">to</Text>
+            <Button fontSize="md"
+              variant={"ghost"}
+              colorScheme="secondary"
+              mt={"2"}
+              onPress={() => {
+                console.log("hello");
+              }}
+            >
+              USD
+            </Button>
+          </HStack>
+        </Container>
       </Box>
     </View>
   );
