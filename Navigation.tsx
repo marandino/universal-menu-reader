@@ -15,8 +15,10 @@ import CameraScreen from "./screens/CameraScreen";
 
 // in case we need to pass a parameter into a screen, we can do it here like this:
 // Home: { userId: string }; instead of undefined
+
+//TODO: change all "currencies" to  a proper type definition
 export type ScreenParams = {
-  Camera: undefined;
+  Camera: { localCurrency: string; foreignCurrency: string };
   Home: undefined;
 };
 export type ScreenProps = NativeStackScreenProps<ScreenParams>;

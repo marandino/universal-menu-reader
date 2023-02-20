@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }: ScreenProps) {
           mt={6}
           colorScheme="primary"
           onPress={() => {
-            navigation.navigate("Camera");
+            navigation.navigate("Camera", {localCurrency, foreignCurrency});
           }}
         >
           Open Camera
