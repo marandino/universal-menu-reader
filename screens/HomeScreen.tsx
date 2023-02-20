@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, View, Button, Text, Heading, Container, HStack } from "native-base";
+import { Box, View, Button, Text, Heading, Container, HStack, Select, CheckIcon } from "native-base";
 import { Linking } from "react-native";
 import { ScreenProps } from "../Navigation";
 
@@ -9,6 +9,8 @@ function openLink(url: string) {
 }
 
 export default function HomeScreen({ navigation }: ScreenProps) {
+  const [service1, setService1] = React.useState("");
+  const [service2, setService2] = React.useState("");
   return (
     <View h={"100%"} background="primary">
       <Box
@@ -50,29 +52,31 @@ export default function HomeScreen({ navigation }: ScreenProps) {
         >
           Open Camera
         </Button>
-        <Container alignSelf={"center"} >
-          <HStack space="1">
-            <Button
-              variant={"ghost"}
-              colorScheme="secondary"
-              mt={"2"}
-              onPress={() => {
-                console.log("hello");
-              }}
-            >
-              CRC
-            </Button>
+        <Container alignSelf={"center"} mt="5" >
+          <HStack space="5">
+            <Select width={110} selectedValue= {service1} mx={{
+              base: 0,
+              md: "auto"
+            }} onValueChange={itemValue => setService1(itemValue)} _selectedItem={{
+              bg: "cyan.600",
+              endIcon: <CheckIcon size={10} />
+            }} accessibilityLabel="Currency" placeholder="Currency">
+              <Select.Item label="USD" value="USD" />
+              <Select.Item label="CRC" value="CRC" />
+              <Select.Item label="EUR" value="EUR" />
+            </Select>
             <Text mt={"4"} textAlign={"center"} fontSize="md">to</Text>
-            <Button fontSize="md"
-              variant={"ghost"}
-              colorScheme="secondary"
-              mt={"2"}
-              onPress={() => {
-                console.log("hello");
-              }}
-            >
-              USD
-            </Button>
+            <Select width={110} selectedValue= {service2} mx={{
+              base: 0,
+              md: "auto"
+            }} onValueChange={itemValue => setService2(itemValue)} _selectedItem={{
+              bg: "cyan.600",
+              endIcon: <CheckIcon size={10} />
+            }} accessibilityLabel="Currency" placeholder="Currency">
+              <Select.Item label="USD" value="USD" />
+              <Select.Item label="CRC" value="CRC" />
+              <Select.Item label="EUR" value="EUR" />
+            </Select>
           </HStack>
         </Container>
       </Box>
