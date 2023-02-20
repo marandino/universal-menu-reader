@@ -2,7 +2,13 @@ import { Camera, CameraCapturedPicture, CameraType } from "expo-camera";
 import { useRef, useState } from "react";
 import { Button, Text, View, Container, Image } from "native-base";
 
-export default function CameraScreen() {
+//Navigation Types and Props
+import { ScreenParams } from "../Navigation";
+type Props = NativeStackScreenProps<ScreenParams, "Camera">;
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+export default function CameraScreen({ route }: Props) {
+  const { localCurrency, foreignCurrency } = route.params;
   const [type, setType] = useState(CameraType.back);
   const [isPictureOnBuffer, setPictureOnBuffer] =
     useState<CameraCapturedPicture>();

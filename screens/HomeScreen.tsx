@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, View, Button, Text, Heading } from "native-base";
+import { Box, View, Button, Text, Heading, Container, HStack, Select } from "native-base";
 import { Linking } from "react-native";
 import { ScreenProps } from "../Navigation";
 
@@ -9,6 +9,8 @@ function openLink(url: string) {
 }
 
 export default function HomeScreen({ navigation }: ScreenProps) {
+  const [localCurrency, setLocalCurrency] = React.useState("CRC");
+  const [foreignCurrency, setForeignCurrency] = React.useState("USD");
   return (
     <View h={"100%"} background="primary">
       <Box
@@ -45,21 +47,54 @@ export default function HomeScreen({ navigation }: ScreenProps) {
           mt={6}
           colorScheme="primary"
           onPress={() => {
-            navigation.navigate("Camera");
+            navigation.navigate("Camera", {localCurrency, foreignCurrency});
           }}
         >
           Open Camera
         </Button>
-        <Button
-          variant={"ghost"}
-          colorScheme="secondary"
-          mt={"2"}
-          onPress={() => {
-            console.log("hello");
-          }}
-        >
-          Select Currency
-        </Button>
+        <Container alignSelf={"center"} mt="5">
+          <HStack space="5">
+            <Select
+              width={110}
+              selectedValue={foreignCurrency}
+              mx={{
+                base: 0,
+                md: "auto",
+              }}
+              onValueChange={(itemValue) => setForeignCurrency(itemValue)}
+              _selectedItem={{
+                bg: "primary.600",
+              }}
+              accessibilityLabel="Foreign Currency Selector"
+              placeholder="Currency"
+            >
+              <Select.Item label="USD" value="USD" />
+              <Select.Item label="CRC" value="CRC" />
+              <Select.Item label="EUR" value="EUR" />
+            </Select>
+            <Text mt={"4"} textAlign={"center"} fontSize="md">
+              to
+            </Text>
+            <Select
+              width={110}
+              selectedValue={localCurrency}
+              mx={{
+                base: 0,
+                md: "auto",
+              }}
+              onValueChange={(itemValue) => setLocalCurrency(itemValue)}
+              _selectedItem={{
+                bg: "primary.600",
+              }}
+              accessibilityLabel="Local Currency Selector"
+              placeholder="Currency"
+            >
+              <Select.Item label="USD" value="USD" />
+              <Select.Item label="CRC" value="CRC" />
+              <Select.Item label="EUR" value="EUR" />
+            </Select>
+          </HStack>
+        </Container>
       </Box>
     </View>
   );
